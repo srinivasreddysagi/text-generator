@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Data from './Data';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [no, setNo] = useState(0);
+
+  function generate(e) {
+    e.preventDefault();
+    console.log(no);
+  }
+
+  function changeHandle(e) {
+    setNo(e.target.value);
+  }
+
+    return (
+        <div className="App">
+            <form action="submit" className="form">
+                <label htmlFor="parano">No of Paragraphs</label>
+                <input type="number" min="0" max="21" value={no} name="parano" onChange={changeHandle}/>
+                <button type="submit" className="btn" onClick={generate}>
+                    Generate
+                </button>
+            </form>
+            <div className="ps">{Data.slice(0, no).map((i) => <p>{i}</p> )}</div>
+        </div>
+    );
 }
 
 export default App;
